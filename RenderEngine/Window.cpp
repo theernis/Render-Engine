@@ -18,7 +18,7 @@ LRESULT CALLBACK Windowproc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 Window::Window()
 	: m_hInstance(GetModuleHandle(nullptr))
 {
-	const wchar_t* CLASS_NAME = L"Test Window";
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, nullptr);
 
 	WNDCLASS wndClass = {};
 	wndClass.lpszClassName = CLASS_NAME;
@@ -62,9 +62,9 @@ Window::Window()
 
 Window::~Window()
 {
-	const wchar_t* CLASS_NAME = L"Test Window";
-
 	UnregisterClass(CLASS_NAME, m_hInstance);
+
+	Gdiplus::GdiplusShutdown(gdiplusToken);
 }
 
 bool Window::ProcessMessages()
