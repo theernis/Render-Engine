@@ -20,6 +20,7 @@ int main()
         }
 
         //render
+        pWindow->Draw();
 
         Sleep(10);
     }

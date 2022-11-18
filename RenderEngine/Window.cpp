@@ -83,3 +83,19 @@ bool Window::ProcessMessages()
 
 	return true;
 }
+
+int Window::Draw()
+{
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint(m_hWnd, &ps);
+
+	Gdiplus::Graphics gf(hdc);
+	Gdiplus::Pen pen(Gdiplus::Color(255, 255, 0, 0));
+	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
+
+	gf.FillRectangle(&brush, 100, 100, 10, 10);
+	gf.DrawLine(&pen, 0, 0, 200, 200);
+
+	EndPaint(m_hWnd, &ps);
+	return 0;
+}

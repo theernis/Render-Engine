@@ -56,21 +56,25 @@ struct Color
 	{
 		return a == color.a && r == color.r && g == color.g && b == color.b;
 	}
+	//multiplication with float values
 	inline Color operator*(float value)
 	{
 		return Color(max(min(r * value, 255), 0), max(min(g * value, 255), 0), max(min(b * value, 255), 0));
 	}
+	//division with float values
 	inline Color operator/(float value)
 	{
 		return Color(max(min(r / value, 255), 0), max(min(g / value, 255), 0), max(min(b / value, 255), 0));
 	}
-	inline Color operator-(Color value)
-	{
-		return Color(max(min(r - value.r, 255), 0), max(min(g - value.g, 255), 0), max(min(b - value.b, 255), 0));
-	}
+	//addtion with color values
 	inline Color operator+(Color value)
 	{
 		return Color(max(min(r + value.r, 255), 0), max(min(g + value.g, 255), 0), max(min(b + value.b, 255), 0));
+	}
+	//subtraction with color values
+	inline Color operator-(Color value)
+	{
+		return Color(max(min(r - value.r, 255), 0), max(min(g - value.g, 255), 0), max(min(b - value.b, 255), 0));
 	}
 };
 
@@ -83,6 +87,8 @@ public:
 	~Window();
 
 	bool ProcessMessages();
+
+	int Draw();
 
 private:
 	HINSTANCE m_hInstance;
