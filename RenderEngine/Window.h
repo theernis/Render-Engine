@@ -12,6 +12,7 @@ struct Color
 	UINT8 g = 0;
 	UINT8 b = 0;
 
+	//creates new color
 	Color();
 	Color(UINT8 red, UINT8 green, UINT8 blue) {
 		r = red;
@@ -25,27 +26,23 @@ struct Color
 		b = blue;
 	}
 
-	Color Red()
+	//call by Color::Red();
+	static Color Red()
 	{
 		return Color(255, 0, 0);
 	}
-	Color Green()
+	//call by Color::Green();
+	static Color Green()
 	{
 		return Color(0, 255, 0);
 	}
-	Color Blue()
+	//call by Color::Blue()
+	static Color Blue()
 	{
 		return Color(0, 0, 255);
-	}
+	};
 
-	inline Color operator=(Color color)
-	{
-		a = color.a;
-		r = color.r;
-		g = color.g;
-		b = color.b;
-		return color;
-	}
+	//creates ability to compare two colors
 	inline bool operator==(Color color)
 	{
 		return a == color.a && r == color.r && g == color.g && b == color.b;
