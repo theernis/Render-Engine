@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <gdiplus.h>
+#include <cmath>
 
 LRESULT CALLBACK Windowproc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -14,12 +15,12 @@ struct Color
 
 	//creates new color
 	Color();
-	Color(UINT8 red, UINT8 green, UINT8 blue) {
+	Color(int red, int green, int blue) {
 		r = red;
 		g = green;
 		b = blue;
 	}
-	Color(UINT8 alpha, UINT8 red, UINT8 green, UINT8 blue) {
+	Color(int alpha, int red, int green, int blue) {
 		a = alpha;
 		r = red;
 		g = green;
@@ -42,10 +43,34 @@ struct Color
 		return Color(0, 0, 255);
 	};
 
+	//lerps between two colors
+	static Color Lerp(Color color1, Color color2, float value)
+	{
+		value -= floor(value);
+		Color result = color1 * value + color2 * (1 - value);
+		return result;
+	}
+
 	//creates ability to compare two colors
 	inline bool operator==(Color color)
 	{
 		return a == color.a && r == color.r && g == color.g && b == color.b;
+	}
+	inline Color operator*(float value)
+	{
+		return Color(max(min(r * value, 255), 0), max(min(g * value, 255), 0), max(min(b * value, 255), 0));
+	}
+	inline Color operator/(float value)
+	{
+		return Color(max(min(r / value, 255), 0), max(min(g / value, 255), 0), max(min(b / value, 255), 0));
+	}
+	inline Color operator-(Color value)
+	{
+		return Color(max(min(r - value.r, 255), 0), max(min(g - value.g, 255), 0), max(min(b - value.b, 255), 0));
+	}
+	inline Color operator+(Color value)
+	{
+		return Color(max(min(r + value.r, 255), 0), max(min(g + value.g, 255), 0), max(min(b + value.b, 255), 0));
 	}
 };
 
