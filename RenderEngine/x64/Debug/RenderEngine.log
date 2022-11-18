@@ -1,3 +1,2 @@
-﻿Window.obj : error LNK2019: unresolved external symbol GdiplusStartup referenced in function "public: __cdecl Window::Window(void)" (??0Window@@QEAA@XZ)
-Window.obj : error LNK2019: unresolved external symbol GdiplusShutdown referenced in function "public: __cdecl Window::~Window(void)" (??1Window@@QEAA@XZ)
-C:\Users\ernestas\Desktop\Render Engine\x64\Debug\RenderEngine.exe : fatal error LNK1120: 2 unresolved externals
+﻿  RenderEngine.cpp
+  RenderEngine.vcxproj -> C:\Users\ernestas\Desktop\Render Engine\x64\Debug\RenderEngine.exe
