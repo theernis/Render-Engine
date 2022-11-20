@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <gdiplus.h>
 #include <cmath>
+#include <list>
 
 LRESULT CALLBACK Windowproc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -78,6 +79,122 @@ struct Color
 	}
 };
 
+struct DrawObject
+{
+	enum ObjectType {DOT, LINE, SQUARE, TRIANGLE, GRADIENT_LINE, GRADIENT_SQUARE, GRADIENT_TRIANGLE};
+
+private:
+	ObjectType thisObject;
+
+public:
+
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+	int x3;
+	int y3;
+
+	Color color1;
+	Color color2;
+	Color color3;
+	Color color4;
+
+	void Dot(int posx, int posy, Color color)
+	{
+		thisObject = DOT;
+		x1 = posx;
+		y1 = posy;
+		color1 = color;
+	}
+	void Line(int posx1, int posy1, int posx2, int posy2, Color color)
+	{
+		thisObject = LINE;
+		x1 = posx1;
+		y1 = posy1;
+		x2 = posx2;
+		y2 = posy2;
+		color1 = color;
+	}
+	void Square(int posx, int posy, int sizex, int sizey, Color color)
+	{
+		thisObject = SQUARE;
+		x1 = posx;
+		y1 = posy;
+		x2 = sizex;
+		y2 = sizey;
+		color1 = color;
+	}
+	void Triangle(int posx1, int posy1, int posx2, int posy2, int posx3, int posy3, Color color)
+	{
+		thisObject = TRIANGLE
+			;
+		x1 = posx1;
+		y1 = posy1;
+		x2 = posx2;
+		y2 = posy2;
+		x3 = posx3;
+		y3 = posy3;
+		color1 = color;
+	}
+	void GradientLine(int posx1, int posy1, int posx2, int posy2, Color gradientColor1, Color gradientColor2)
+	{
+		thisObject = GRADIENT_LINE;
+		x1 = posx1;
+		y1 = posy1;
+		x2 = posx2;
+		y2 = posy2;
+		color1 = gradientColor1;
+		color2 = gradientColor2;
+	}
+	void GradientSquare(int posx, int posy, int sizex, int sizey, Color gradientColor1, Color gradientColor2, Color gradientColor3, Color gradientColor4)
+	{
+		thisObject = GRADIENT_SQUARE;
+		x1 = posx;
+		y1 = posy;
+		x2 = sizex;
+		y2 = sizey;
+		color1 = gradientColor1;
+		color2 = gradientColor2;
+		color3 = gradientColor3;
+		color4 = gradientColor4;
+	}
+	void GradientTriangle(int posx1, int posy1, int posx2, int posy2, int posx3, int posy3, Color gradientColor1, Color gradientColor2, Color gradientColor3)
+	{
+		thisObject = GRADIENT_TRIANGLE;
+		x1 = posx1;
+		y1 = posy1;
+		x2 = posx2;
+		y2 = posy2;
+		x3 = posx3;
+		y3 = posy3;
+		color1 = gradientColor1;
+		color2 = gradientColor2;
+		color3 = gradientColor3;
+	}
+
+	void Draw(HDC hdc)
+	{
+		switch(thisObject)
+		{
+		case DOT:
+			break;
+		case LINE:
+			break;
+		case SQUARE:
+			break;
+		case TRIANGLE:
+			break;
+		case GRADIENT_LINE:
+			break;
+		case GRADIENT_SQUARE:
+			break;
+		case GRADIENT_TRIANGLE:
+			break;
+		}
+	}
+};
+
 class Window
 {
 public:
@@ -86,9 +203,11 @@ public:
 	Window& operator = (const Window&) = delete;
 	~Window();
 
+	std::list<DrawObject> drawCommands;
+
 	bool ProcessMessages();
 
-	int Draw();
+	void Draw();
 
 private:
 	HINSTANCE m_hInstance;

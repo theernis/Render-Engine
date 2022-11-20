@@ -1,16 +1,8 @@
-﻿  RenderEngine.cpp
+﻿  Window.cpp
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Window.cpp
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(62,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(67,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
   RenderEngine.vcxproj -> C:\Users\ernestas\Desktop\Render Engine\x64\Debug\RenderEngine.exe

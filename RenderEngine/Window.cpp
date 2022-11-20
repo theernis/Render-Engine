@@ -1,11 +1,16 @@
 #include "Window.h"
 
+extern Window* pWindow;
+
 LRESULT CALLBACK Windowproc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
 	case WM_CLOSE:
 		DestroyWindow(hWnd);
+		break;
+	case WM_PAINT:
+		pWindow->Draw();
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
@@ -84,7 +89,7 @@ bool Window::ProcessMessages()
 	return true;
 }
 
-int Window::Draw()
+void Window::Draw()
 {
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(m_hWnd, &ps);
@@ -94,8 +99,12 @@ int Window::Draw()
 	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
 
 	gf.FillRectangle(&brush, 100, 100, 10, 10);
-	gf.DrawLine(&pen, 0, 0, 200, 200);
+	gf.DrawLine(&pen, 100, 0, 200, 200);
+
+	for (DrawObject command : drawCommands) {
+		command.Draw(hdc);
+	}
 
 	EndPaint(m_hWnd, &ps);
-	return 0;
+	return;
 }

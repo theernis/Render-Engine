@@ -4,11 +4,13 @@
 #include <iostream>
 #include "Window.h"
 
+Window* pWindow = nullptr;
+
 int main()
 {
     std::cout << "Creating Window\n";
 
-    Window* pWindow = new Window();
+    pWindow = new Window();
 
     bool running = true;
     while (running)
@@ -20,7 +22,6 @@ int main()
         }
 
         //render
-        pWindow->Draw();
 
         Sleep(10);
     }
@@ -29,7 +30,6 @@ int main()
 
     return 0;
 }
-
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
