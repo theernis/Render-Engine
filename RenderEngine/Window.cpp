@@ -101,6 +101,11 @@ void Window::Draw()
 	gf.FillRectangle(&brush, 100, 100, 10, 10);
 	gf.DrawLine(&pen, 100, 0, 200, 200);
 
+	DrawObject dot = DrawObject();
+	dot.Dot(100, 50, Color::Red());
+
+	drawCommands.push_back(dot);
+
 	for (DrawObject command : drawCommands) {
 		command.Draw(hdc);
 	}

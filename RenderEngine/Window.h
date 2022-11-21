@@ -81,10 +81,10 @@ struct Color
 
 struct DrawObject
 {
-	enum ObjectType {DOT, LINE, SQUARE, TRIANGLE, GRADIENT_LINE, GRADIENT_SQUARE, GRADIENT_TRIANGLE};
+	enum ObjectType {DEFAULT, DOT, LINE, SQUARE, TRIANGLE, GRADIENT_LINE, GRADIENT_SQUARE, GRADIENT_TRIANGLE};
 
 private:
-	ObjectType thisObject;
+	ObjectType thisObject = DEFAULT;
 
 public:
 
@@ -99,6 +99,22 @@ public:
 	Color color2;
 	Color color3;
 	Color color4;
+
+	//Default
+	DrawObject()
+	{
+		thisObject = DEFAULT;
+		x1 = NULL;
+		y1 = NULL;
+		x2 = NULL;
+		y2 = NULL;
+		x3 = NULL;
+		y3 = NULL;
+		color1 = Color(0, 0, 0, 0);
+		color2 = Color(0, 0, 0, 0);
+		color3 = Color(0, 0, 0, 0);
+		color4 = Color(0, 0, 0, 0);
+	}
 
 	void Dot(int posx, int posy, Color color)
 	{
@@ -175,13 +191,20 @@ public:
 
 	void Draw(HDC hdc)
 	{
+		Gdiplus::Graphics gf(hdc);
+		Gdiplus::Pen pen(Gdiplus::Color(255, 255, 0, 0));
+		Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
+
 		switch(thisObject)
 		{
 		case DOT:
+			gf.FillRectangle(&brush, x1, y1, 1, 1);
 			break;
 		case LINE:
+			gf.DrawLine(&pen, x1, y1, x2, y2);
 			break;
 		case SQUARE:
+			gf.FillRectangle(&brush, x1, y1, x2, y2);
 			break;
 		case TRIANGLE:
 			break;
