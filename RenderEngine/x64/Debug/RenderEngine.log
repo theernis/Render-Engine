@@ -1,9 +1,16 @@
-﻿  Window.cpp
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(63,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(63,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(63,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(68,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(68,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(68,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-Window.obj : error LNK2019: unresolved external symbol "public: __cdecl Color::Color(void)" (??0Color@@QEAA@XZ) referenced in function "public: __cdecl DrawObject::DrawObject(void)" (??0DrawObject@@QEAA@XZ)
-C:\Users\ernestas\Desktop\Render Engine\x64\Debug\RenderEngine.exe : fatal error LNK1120: 1 unresolved externals
+﻿  RenderEngine.cpp
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Window.cpp
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(69,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\Window.h(74,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  RenderEngine.vcxproj -> C:\Users\ernestas\Desktop\Render Engine\x64\Debug\RenderEngine.exe

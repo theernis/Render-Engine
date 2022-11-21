@@ -36,8 +36,8 @@ Window::Window()
 
 	DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
 
-	int width = 640;
-	int height = 480;
+	width = 640;
+	height = 480;
 
 	RECT rect;
 	rect.left = 250;
@@ -89,20 +89,25 @@ bool Window::ProcessMessages()
 	return true;
 }
 
+void Window::Fill(HDC hdc)
+{
+
+	DrawObject Background = DrawObject();
+	Background.Square(0, 0, width, height, fillColor);
+
+	Background.Draw(hdc);
+	return;
+}
+
 void Window::Draw()
 {
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(m_hWnd, &ps);
 
-	Gdiplus::Graphics gf(hdc);
-	Gdiplus::Pen pen(Gdiplus::Color(255, 255, 0, 0));
-	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
-
-	gf.FillRectangle(&brush, 100, 100, 10, 10);
-	gf.DrawLine(&pen, 100, 0, 200, 200);
+	Fill(hdc);
 
 	DrawObject dot = DrawObject();
-	dot.Dot(100, 50, Color::Red());
+	dot.Line(100, 50, 10, 10, Color::Blue());
 
 	drawCommands.push_back(dot);
 

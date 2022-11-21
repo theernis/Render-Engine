@@ -15,7 +15,13 @@ struct Color
 	UINT8 b = 0;
 
 	//creates new color
-	Color();
+	Color()
+	{
+		a = 255;
+		r = 0;
+		g = 0;
+		b = 0;
+	}
 	Color(int red, int green, int blue) {
 		r = red;
 		g = green;
@@ -192,8 +198,8 @@ public:
 	void Draw(HDC hdc)
 	{
 		Gdiplus::Graphics gf(hdc);
-		Gdiplus::Pen pen(Gdiplus::Color(255, 255, 0, 0));
-		Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
+		Gdiplus::Pen pen(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
+		Gdiplus::SolidBrush brush(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
 
 		switch(thisObject)
 		{
@@ -230,9 +236,13 @@ public:
 
 	bool ProcessMessages();
 
+	Color fillColor = Color(0, 0, 0);
+	void Fill(HDC hdc);
 	void Draw();
 
 private:
+	int width;
+	int height;
 	HINSTANCE m_hInstance;
 	HWND m_hWnd;
 	const wchar_t* CLASS_NAME = L"Test Window";
