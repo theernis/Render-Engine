@@ -99,7 +99,7 @@ void Window::Draw()
 
 	Fill(hdc);
 
-	drawCommands.push_back(DrawObject::Line(0, 300, 300, 300, Color::Blue()));
+	drawCommands.push_back(DrawObject::GradientTriangle(10, 100, 100, 10, 150, 150, Color::Red(), Color::Green(), Color::Blue()));
 
 	for (DrawObject command : drawCommands)
 	{

@@ -53,7 +53,6 @@ struct Color
 	//lerps between two colors
 	static Color Lerp(Color color1, Color color2, float value)
 	{
-		value -= floor(value);
 		Color result = color1 * value + color2 * (1 - value);
 		return result;
 	}
@@ -176,39 +175,87 @@ public:
 		{
 		case DOT:
 			{
-				gf.FillRectangle(&brush, x1, y1, 1, 1);
-				return;
+			gf.FillRectangle(&brush, x1, y1, 1, 1);
+			return;
 			}
 		case LINE:
 			{
-				float length = max(abs(x1 - x2), abs(y1 - y2)) + 1;
+			float length = max(abs(x1 - x2), abs(y1 - y2));
 
-				for (int a = 0; a <= length; a++)
-				{
-					DrawObject::Dot(x1 + (x2 - x1) * (a / length), y1 + (y2 - y1) * (a / length), color1).Draw(hdc);
-				}
-				return;
+			for (int a = 0; a <= length; a++)
+			{
+				DrawObject::Dot(round(x1 + (x2 - x1) * (a / length)), round(y1 + (y2 - y1) * (a / length)), color1).Draw(hdc);
+			}
+			return;
 			}
 		case SQUARE:
 			{
-				gf.FillRectangle(&brush, x1, y1, x2, y2);
-				return;
+			gf.FillRectangle(&brush, x1, y1, x2, y2);
+			return;
 			}
 		case TRIANGLE:
 			{
-				return;
+			float length = max(abs(x1 - x2), abs(y1 - y2)) * 2;
+
+			for (int a = 0; a <= length; a++)
+			{
+				int t_x = round(x1 + (x2 - x1) * (a / length));
+				int t_y = round(y1 + (y2 - y1) * (a / length));
+				float t_length = max(abs(t_x - x3), abs(t_y - y3));
+
+				for (int b = 0; b <= t_length; b++)
+				{
+					DrawObject::Dot(round(t_x + (x3 - t_x) * (b / t_length)), round(t_y + (y3 - t_y) * (b / t_length)), color1).Draw(hdc);
+				}
+			}
+			return;
 			}
 		case GRADIENT_LINE:
 			{
-				return;
+			float length = max(abs(x1 - x2), abs(y1 - y2));
+
+			for (int a = 0; a <= length; a++)
+			{
+				DrawObject::Dot(round(x1 + (x2 - x1) * (a / length)), round(y1 + (y2 - y1) * (a / length)), Color::Lerp(color1, color2, a / length)).Draw(hdc);
+			}
+			return;
 			}
 		case GRADIENT_SQUARE:
 			{
-				return;
+			for (float a = 0; a < abs(x2); a++)
+			{
+				for (float b = 0; b < abs(y2); b++)
+				{
+					DrawObject::Dot(x1 + a, y1 + b, Color::Lerp(Color::Lerp(color1, color2, 1 - a / abs(x2)), Color::Lerp(color4, color3, 1 - a / abs(x2)), 1 - b / abs(y2))).Draw(hdc);
+				}
+			}
+			return;
 			}
 		case GRADIENT_TRIANGLE:
 			{
-				return;
+			float length = max(abs(x1 - x2), abs(y1 - y2)) * 2;
+
+			for (int a = 0; a <= length; a++)
+			{
+				int t1_x = round(x1 + (x2 - x1) * (a / length));
+				int t1_y = round(y1 + (y2 - y1) * (a / length));
+				float t1_length = max(abs(t1_x - x3), abs(t1_y - y3));
+
+				for (int b = 0; b <= t1_length; b++)
+				{
+					int t2_x = round(t1_x + (x3 - t1_x) * (b / t1_length));
+					int t2_y = round(t1_y + (y3 - t1_y) * (b / t1_length));
+
+					float mod1 = sqrt(pow((t2_x - x1), 2) + pow((t2_y - y1), 2));
+					float mod2 = sqrt(pow((t2_x - x2), 2) + pow((t2_y - y2), 2));
+					float mod3 = sqrt(pow((t2_x - x3), 2) + pow((t2_y - y3), 2));
+
+					float sum = mod1 + mod2 + mod3;
+
+					DrawObject::Dot(t2_x, t2_y, Color(255, 255, 255) - ((color1 * (mod1 / sum)) + (color2 * (mod2 / sum)) + (color3 * (mod3 / sum)))).Draw(hdc);
+				}
+			}
+			return;
 			}
 		}
 	}
