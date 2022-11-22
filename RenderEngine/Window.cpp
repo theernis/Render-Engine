@@ -36,9 +36,6 @@ Window::Window()
 
 	DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
 
-	width = 640;
-	height = 480;
-
 	RECT rect;
 	rect.left = 250;
 	rect.top = 250;
@@ -91,11 +88,7 @@ bool Window::ProcessMessages()
 
 void Window::Fill(HDC hdc)
 {
-
-	DrawObject Background = DrawObject();
-	Background.Square(0, 0, width, height, fillColor);
-
-	Background.Draw(hdc);
+	DrawObject::Square(0, 0, width, height, fillColor).Draw(hdc);
 	return;
 }
 
@@ -106,10 +99,7 @@ void Window::Draw()
 
 	Fill(hdc);
 
-	DrawObject dot = DrawObject();
-	dot.Line(100, 50, 10, 10, Color::Blue());
-
-	drawCommands.push_back(dot);
+	drawCommands.push_back(DrawObject::Line(0, 0, 640, 480, Color::Blue()));
 
 	for (DrawObject command : drawCommands) {
 		command.Draw(hdc);
