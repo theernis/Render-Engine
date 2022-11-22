@@ -99,9 +99,10 @@ void Window::Draw()
 
 	Fill(hdc);
 
-	drawCommands.push_back(DrawObject::Line(0, 0, 640, 480, Color::Blue()));
+	drawCommands.push_back(DrawObject::Line(0, 300, 300, 300, Color::Blue()));
 
-	for (DrawObject command : drawCommands) {
+	for (DrawObject command : drawCommands)
+	{
 		command.Draw(hdc);
 	}
 

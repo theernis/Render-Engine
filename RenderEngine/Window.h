@@ -172,40 +172,44 @@ public:
 		Gdiplus::Pen pen(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
 		Gdiplus::SolidBrush brush(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
 
-		if (thisObject == DOT)
+		switch (thisObject)
 		{
-			gf.FillRectangle(&brush, x1, y1, 1, 1);
-			return;
-		}
-		if (thisObject == LINE)
-		{
-			float length = max(abs(x1 - x2), abs(y1 - y2));
-
-			for (int a = 0; a <= length; a++) {
-				DrawObject::Dot(x1 + (x2 - x1) * (a / length), y1 + (y2 - y1) * (a / length), color1).Draw(hdc);
+		case DOT:
+			{
+				gf.FillRectangle(&brush, x1, y1, 1, 1);
+				return;
 			}
-			return;
-		}
-		if (thisObject == SQUARE)
-		{
-			gf.FillRectangle(&brush, x1, y1, x2, y2);
-			return;
-		}
-		if (thisObject == TRIANGLE)
-		{
-			return;
-		}
-		if (thisObject == GRADIENT_LINE)
-		{
-			return;
-		}
-		if (thisObject == GRADIENT_SQUARE)
-		{
-			return;
-		}
-		if (thisObject == GRADIENT_TRIANGLE)
-		{
-			return;
+		case LINE:
+			{
+				float length = max(abs(x1 - x2), abs(y1 - y2)) + 1;
+
+				for (int a = 0; a <= length; a++)
+				{
+					DrawObject::Dot(x1 + (x2 - x1) * (a / length), y1 + (y2 - y1) * (a / length), color1).Draw(hdc);
+				}
+				return;
+			}
+		case SQUARE:
+			{
+				gf.FillRectangle(&brush, x1, y1, x2, y2);
+				return;
+			}
+		case TRIANGLE:
+			{
+				return;
+			}
+		case GRADIENT_LINE:
+			{
+				return;
+			}
+		case GRADIENT_SQUARE:
+			{
+				return;
+			}
+		case GRADIENT_TRIANGLE:
+			{
+				return;
+			}
 		}
 	}
 };
