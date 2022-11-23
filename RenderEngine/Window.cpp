@@ -108,4 +108,8 @@ void Window::Draw()
 
 	EndPaint(m_hWnd, &ps);
 	return;
+
+	drawCommands = {};
+
+	frame++;
 }

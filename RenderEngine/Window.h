@@ -54,6 +54,7 @@ struct Color
 	static Color Lerp(Color color1, Color color2, float value)
 	{
 		Color result = color1 * value + color2 * (1 - value);
+		result.a = color1.a * value + color2.a * (1 - value);
 		return result;
 	}
 
@@ -168,7 +169,6 @@ public:
 	void Draw(HDC hdc)
 	{
 		Gdiplus::Graphics gf(hdc);
-		Gdiplus::Pen pen(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
 		Gdiplus::SolidBrush brush(Gdiplus::Color(color1.a, color1.r, color1.g, color1.b));
 
 		switch (thisObject)
@@ -246,13 +246,32 @@ public:
 					int t2_x = round(t1_x + (x3 - t1_x) * (b / t1_length));
 					int t2_y = round(t1_y + (y3 - t1_y) * (b / t1_length));
 
+					float error = 1;
+
 					float mod1 = sqrt(pow((t2_x - x1), 2) + pow((t2_y - y1), 2));
+					if (mod1 != 0) { mod1 = 1 / mod1; }
+					else { mod1 = error; }
 					float mod2 = sqrt(pow((t2_x - x2), 2) + pow((t2_y - y2), 2));
+					if (mod2 != 0) { mod2 = 1 / mod2; }
+					else { mod2 = error; }
 					float mod3 = sqrt(pow((t2_x - x3), 2) + pow((t2_y - y3), 2));
+					if (mod3 != 0) { mod3 = 1 / mod3; }
+					else { mod3 = error; }
+
+					float max = max(max(mod1, mod2), mod3);
+
+					if (max != 0) { mod1 /= max; mod2 /= max; mod3 /= max; }
 
 					float sum = mod1 + mod2 + mod3;
 
-					DrawObject::Dot(t2_x, t2_y, Color(255, 255, 255) - ((color1 * (mod1 / sum)) + (color2 * (mod2 / sum)) + (color3 * (mod3 / sum)))).Draw(hdc);
+					if (sum != 0) { mod1 /= sum; mod2 /= sum; mod3 /= sum; }
+
+					int c_a = color1.a * mod1 + color2.a * mod2 + color3.a * mod3;
+					int c_r = color1.r * mod1 + color2.r * mod2 + color3.r * mod3;
+					int c_g = color1.g * mod1 + color2.g * mod2 + color3.g * mod3;
+					int c_b = color1.b * mod1 + color2.b * mod2 + color3.b * mod3;
+
+					DrawObject::Dot(t2_x, t2_y, Color(c_a, c_r, c_g, c_b)).Draw(hdc);
 				}
 			}
 			return;
@@ -276,6 +295,8 @@ public:
 	Color fillColor = Color(0, 0, 0);
 	void Fill(HDC hdc);
 	void Draw();
+
+	int frame = 0;
 
 private:
 	int width = 640;
