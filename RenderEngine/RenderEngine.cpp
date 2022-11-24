@@ -2,31 +2,10 @@
 //
 
 #include <iostream>
-#include "Window.h"
-
-Window* pWindow = nullptr;
 
 int main()
 {
-    std::cout << "Creating Window\n";
-
-    pWindow = new Window();
-
-    bool running = true;
-    while (running)
-    {
-        if (!pWindow->ProcessMessages())
-        {
-            std::cout << "Closing Window\n";
-            running = false;
-        }
-
-        //render
-
-        Sleep(10);
-    }
-
-    delete pWindow;
+    std::cout << "Helo World" << std::endl;
 
     return 0;
 }
