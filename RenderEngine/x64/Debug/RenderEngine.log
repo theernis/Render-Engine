@@ -1,0 +1,2 @@
+﻿  RenderEngine.cpp
+C:\Users\ernestas\Desktop\Render Engine\RenderEngine\RenderEngine.cpp(6,10): fatal  error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
